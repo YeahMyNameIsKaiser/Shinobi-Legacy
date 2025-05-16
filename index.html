@@ -32,6 +32,24 @@
       pointer-events: none;
       mix-blend-mode: multiply;
     }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      /* Neon red glow effect by overlaying a subtle pulsating blurred radial gradient */
+      background:
+        radial-gradient(circle at center, rgba(255, 0, 0, 0.15), transparent 70%);
+      filter: blur(40px);
+      animation: pulseNeon 4s ease-in-out infinite;
+      mix-blend-mode: screen;
+      opacity: 0.6;
+    }
+    @keyframes pulseNeon {
+      0%,100% { opacity: 0.6; }
+      50% { opacity: 0.8; }
+    }
     header {
       background: rgba(74, 11, 11, 0.7);
       padding: 1.5rem 2rem;
