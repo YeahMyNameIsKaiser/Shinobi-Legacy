@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home - RPG</title>
+  <title>Guia da Shinobi Legacy - Comentários</title>
   <style>
     /* Reset */
     * {
@@ -11,105 +11,637 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #000;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #c8102e;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      color: #fff;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .section {
-      background: #1a1a1a;
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: transform 0.3s;
-    }
-
-    .section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .section h2 {
-      color: #c8102e;
-      margin-bottom: 1rem;
-    }
-
-    .section p {
-      margin-bottom: 1rem;
-      color: #ccc;
-    }
-
-    .section a {
-      display: inline-block;
-      background: #c8102e;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .section a:hover {
-      background: #a60e24;
-    }
-
-    footer {
-      text-align: center;
-      background: #c8102e;
-      color: #fff;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #ddd;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 1rem 0;
+      user-select: none;
+    }
+    h1 {
+      color: #e63946;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      user-select: text;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 1rem 1.5rem 2rem 1.5rem;
+      box-shadow: 0 0 15px #e6394677;
+      box-sizing: border-box;
       position: relative;
-      bottom: 0;
+    }
+    .nickname-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .nickname-section input {
+      flex-grow: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: 2px solid #e63946;
+      background: #2e2e2e;
+      color: #eee;
+      font-size: 1rem;
+      user-select: text;
+    }
+    .nickname-section button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      background: #e63946;
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .nickname-section button:disabled {
+      background: #72000088;
+      cursor: not-allowed;
+    }
+    .nickname-message {
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      color: #f88;
+      user-select: text;
+    }
+
+    /* Editor */
+    .editor {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 0.5rem;
+      user-select: text;
+    }
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .toolbar button {
+      background: #e63946;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .toolbar button:hover:not(:disabled),
+    .toolbar button:focus-visible:not(:disabled) {
+      background-color: #b22632;
+      outline: none;
+    }
+    .toolbar button:disabled {
+      background-color: #72000088;
+      cursor: not-allowed;
+    }
+    .editor textarea {
+      resize: vertical;
+      min-height: 80px;
+      background: #1e1e1e;
+      color: #ddd;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem;
+      font-size: 1rem;
+      font-family: monospace, monospace;
+      user-select: text;
+    }
+
+    /* Comments list */
+    .comments-list {
+      margin-top: 1rem;
+      position: relative;
+      user-select: text;
+    }
+    .comment {
+      background: #292929;
+      border: 1px solid #e63946;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      box-shadow: 0 0 10px #e6394699;
+    }
+    .comment.reply {
+      margin-left: 2rem;
+      border-color: #ab2c36;
+      box-shadow: 0 0 8px #ab2c3699;
+    }
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+    .comment-nickname {
+      font-weight: 900;
+      color: #f94144;
+      user-select: text;
+    }
+    .comment-actions {
+      display: flex;
+      gap: 12px;
+      user-select: none;
+    }
+    .comment-actions button {
+      background: transparent;
+      border: none;
+      color: #f94144;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .comment-actions button:hover,
+    .comment-actions button:focus {
+      color: #fa7c7c;
+      outline: none;
+    }
+    .comment-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: Arial, Helvetica, sans-serif;
+      user-select: text;
+    }
+
+    /* Formatted text styles */
+    strong {
+      font-weight: 900;
+      color: #ff5555;
+    }
+    em {
+      font-style: italic;
+      color: #ffaaaa;
+    }
+    .spoiler {
+      color: transparent;
+      background-color: #333;
+      border-radius: 3px;
+      padding: 0 3px;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #555;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+    .spoiler.revealed {
+      color: inherit;
+      background-color: inherit;
+      border: none;
+      cursor: default;
+      user-select: text;
+    }
+
+    .reply-box {
+      margin-top: 0.8rem;
+      padding-left: 1rem;
+      border-left: 2px solid #bb2c36;
+      user-select: text;
+    }
+    .reply-box textarea {
+      resize: vertical;
       width: 100%;
+      min-height: 60px;
+      background: #2e2e2e;
+      border-radius: 7px;
+      border: 1px solid #e63946;
+      color: #eee;
+      padding: 0.5rem;
+      font-family: monospace, monospace;
+    }
+    .reply-box button {
+      margin-top: 0.4rem;
+      padding: 0.4rem 1rem;
+      font-weight: 700;
+      background: #e63946;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .reply-box button:hover {
+      background-color: #b22632;
+    }
+
+    /* Lines connecting replies */
+    .line-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scroll area for comments */
+    .comments-container {
+      max-height: 400px;
+      overflow-y: auto;
+      position: relative;
+      margin-top: 1rem;
+      user-select: text;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Bem-vindo ao Mundo do RPG</h1>
-  </header>
-  <main>
-    <section class="section">
-      <h2>Sistemas Essenciais</h2>
-      <p>Sistemas necessários para o entendimento inicial do RPG, servindo para que possam começar a jogar.</p>
-      <a href="http://aminoapps.com/p/38f9amk" target="_blank" rel="noopener noreferrer">Saiba mais</a>
-    </section>
+  <h1>Comentários do Guia da Shinobi Legacy</h1>
+  <div class="container">
+    <div class="nickname-section" aria-label="Área para definir nickname">
+      <input type="text" id="nickname-input" aria-label="Digite seu nickname" placeholder="Digite seu nickname" maxlength="20" autocomplete="off" />
+      <button id="set-nick-btn">Confirmar Nickname</button>
+    </div>
+    <div class="nickname-message" id="nickname-message" role="alert" aria-live="assertive"></div>
 
-    <section class="section">
-      <h2>Sistemas Especiais</h2>
-      <p>Sistemas não necessários, mas que abrange seu entendimento e permite acrescentar mais possibilidades de crescimento ao seu personagem.</p>
-      <a href="http://aminoapps.com/p/ncoamlq" target="_blank" rel="noopener noreferrer">Saiba mais</a>
-    </section>
+    <div aria-label="Editor de comentários" class="editor" aria-disabled="true" id="comment-editor" style="opacity:0.6; pointer-events:none;">
+      <div class="toolbar" role="toolbar" aria-label="Ferramentas de formatação">
+        <button type="button" data-command="bold" aria-label="Negrito (Ctrl+B)" title="Negrito (Ctrl+B)" disabled><strong>B</strong></button>
+        <button type="button" data-command="italic" aria-label="Itálico (Ctrl+I)" title="Itálico (Ctrl+I)" disabled><em>I</em></button>
+        <button type="button" data-command="spoiler" aria-label="Spoiler" title="Spoiler" disabled>Spoiler</button>
+        <button type="button" id="clear-format" aria-label="Limpar formatação" title="Limpar formatação" disabled>Limpar</button>
+      </div>
+      <textarea id="comment-textarea" aria-label="Digite seu comentário" placeholder="Escreva seu comentário aqui..." disabled></textarea>
+      <button id="post-comment-btn" disabled>Enviar Comentário</button>
+    </div>
 
-    <section class="section">
-      <h2>Árvores</h2>
-      <p>Fundamental para o crescimento de seu personagem em nosso mundo, que definirá quem ou pelo oque ele será conhecido, seja por sua força, velocidade, ou capacidade de, por exemplo, selamento.</p>
-      <a href="http://aminoapps.com/p/a94443k" target="_blank" rel="noopener noreferrer">Saiba mais</a>
-    </section>
-  </main>
+    <div class="comments-container" id="comments-container" aria-live="polite" aria-relevant="additions removals" aria-atomic="false" tabindex="0">
+      <!-- Comments render here -->
+    </div>
+    <canvas id="lines-canvas" class="line-canvas"></canvas>
+  </div>
 
-  <footer>
-    &copy; 2025 Shinobi Legacy. Todos os direitos reservados.
-  </footer>
-</body>
-</html>
+<script>
+  // Store comments in localStorage key
+  const STORAGE_KEY = 'shinobiLegacyComments';
+  // Store user nickname in localStorage key
+  const NICKNAME_KEY = 'shinobiLegacyNickname';
+
+  // Elements
+  const nicknameInput = document.getElementById('nickname-input');
+  const setNickBtn = document.getElementById('set-nick-btn');
+  const nicknameMessage = document.getElementById('nickname-message');
+  const commentEditor = document.getElementById('comment-editor');
+  const boldBtn = commentEditor.querySelector('button[data-command="bold"]');
+  const italicBtn = commentEditor.querySelector('button[data-command="italic"]');
+  const spoilerBtn = commentEditor.querySelector('button[data-command="spoiler"]');
+  const clearFormatBtn = commentEditor.querySelector('#clear-format');
+  const commentTextarea = document.getElementById('comment-textarea');
+  const postCommentBtn = document.getElementById('post-comment-btn');
+  const commentsContainer = document.getElementById('comments-container');
+  const linesCanvas = document.getElementById('lines-canvas');
+  const ctx = linesCanvas.getContext('2d');
+
+  // State
+  let comments = [];
+  let currentNickname = localStorage.getItem(NICKNAME_KEY) || '';
+  let editingReplyTo = null; // comment id for reply or null for new
+  let nicknameLocked = false;
+
+  // Helper: Save comments array to localStorage
+  function saveComments() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+  }
+
+  // Helper: Load comments array from localStorage
+  function loadComments() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        comments = JSON.parse(stored);
+      } catch(e) {
+        comments = [];
+      }
+    }
+  }
+
+  // Helper: Save nickname locked
+  function lockNickname(nick) {
+    localStorage.setItem(NICKNAME_KEY, nick);
+    currentNickname = nick;
+    nicknameLocked = true;
+  }
+
+  // Enable comment editor if nickname set
+  function enableEditor() {
+    commentEditor.style.opacity = '1';
+    commentEditor.style.pointerEvents = 'auto';
+    boldBtn.disabled = false;
+    italicBtn.disabled = false;
+    spoilerBtn.disabled = false;
+    clearFormatBtn.disabled = false;
+    commentTextarea.disabled = false;
+    postCommentBtn.disabled = false;
+    nicknameInput.disabled = true;
+    setNickBtn.disabled = true;
+    nicknameMessage.textContent = "Nickname definido como: " + currentNickname;
+    nicknameMessage.style.color = '#6ef186';
+  }
+
+  // Disable editor, enable nickname input
+  function disableEditor() {
+    commentEditor.style.opacity = '0.6';
+    commentEditor.style.pointerEvents = 'none';
+    boldBtn.disabled = true;
+    italicBtn.disabled = true;
+    spoilerBtn.disabled = true;
+    clearFormatBtn.disabled = true;
+    commentTextarea.disabled = true;
+    postCommentBtn.disabled = true;
+    nicknameInput.disabled = false;
+    setNickBtn.disabled = false;
+    nicknameMessage.textContent = "Por favor, defina um nickname para comentar.";
+    nicknameMessage.style.color = '#f56969';
+  }
+
+  // Apply formatting commands to textarea content selection
+  function wrapSelection(textarea, tag) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    if (start === end) return;
+    const before = textarea.value.substring(0, start);
+    const selected = textarea.value.substring(start, end);
+    const after = textarea.value.substring(end);
+    textarea.value = before + `<${tag}>` + selected + `</${tag}>` + after;
+    // Restore selection around formatted text
+    textarea.selectionStart = start;
+    textarea.selectionEnd = end + tag.length * 2 + 5; // <tag> and </tag>
+  }
+
+  // Insert spoiler tag specially
+  function wrapSpoiler(textarea) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    if(start === end) return;
+    const before = textarea.value.substring(0, start);
+    const selected = textarea.value.substring(start, end);
+    const after = textarea.value.substring(end);
+    textarea.value = before + `<spoiler>` + selected + `</spoiler>` + after;
+    textarea.selectionStart = start;
+    textarea.selectionEnd = end + 17; // length of <spoiler></spoiler>
+  }
+
+  // Clear all tags from textarea content (simple approach)
+  function clearFormatting(textarea) {
+    textarea.value = textarea.value.replace(/<[^>]+>/g, '');
+  }
+
+  // Convert comment content from simple tags to HTML with styles and spoiler handling
+  function renderCommentContent(text) {
+    let html = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    // Simple replacements for allowed tags
+    html = html.replace(/&lt;strong&gt;(.*?)&lt;\/strong&gt;/gi, '<strong>$1</strong>');
+    html = html.replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/gi, '<strong>$1</strong>');
+    html = html.replace(/&lt;em&gt;(.*?)&lt;\/em&gt;/gi, '<em>$1</em>');
+    html = html.replace(/&lt;i&gt;(.*?)&lt;\/i&gt;/gi, '<em>$1</em>');
+    // Spoiler with interactive span
+    html = html.replace(/&lt;spoiler&gt;(.*?)&lt;\/spoiler&gt;/gi,
+      `<span class="spoiler" tabindex="0" role="button" aria-label="Spoiler: clique para revelar">$1</span>`);
+    // Preserve line breaks for newlines
+    html = html.replace(/\n/g, '<br>');
+
+    return html;
+  }
+
+  // Toggle spoiler reveal on click or keyboard
+  function spoilerToggleHandler(e) {
+    if(!e.target.classList.contains('spoiler')) return;
+    if(e.type === 'click' || (e.type === 'keydown' && (e.key==='Enter' || e.key===' '))) {
+      e.preventDefault();
+      e.target.classList.toggle('revealed');
+    }
+  }
+
+  // Generate unique ID for comment
+  function generateId() {
+    return 'c_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+  }
+
+  // Render comments recursively with replies and lines
+  function renderComments() {
+    commentsContainer.innerHTML = '';
+    // Sort comments ascending by timestamp
+    const orderedComments = [...comments].sort((a,b) => a.timestamp - b.timestamp);
+
+    function createCommentElement(comment, depth=0) {
+      const div = document.createElement('div');
+      div.className = 'comment';
+      if(depth>0) div.classList.add('reply');
+      div.dataset.id = comment.id;
+      div.style.position = 'relative';
+
+      // Header: nickname and actions
+      const header = document.createElement('div');
+      header.className = 'comment-header';
+
+      const nickSpan = document.createElement('span');
+      nickSpan.className = 'comment-nickname';
+      nickSpan.textContent = comment.nickname;
+      header.appendChild(nickSpan);
+
+      const actions = document.createElement('div');
+      actions.className = 'comment-actions';
+
+      // Like (curtir) button
+      const likeBtn = document.createElement('button');
+      likeBtn.setAttribute('aria-label', 'Curtir comentário');
+      likeBtn.title = `Curtir (${comment.likes || 0})`;
+      likeBtn.innerHTML = `👍 ${comment.likes || 0}`;
+      likeBtn.addEventListener('click', () => {
+        comment.likes = (comment.likes || 0) + 1;
+        saveComments();
+        renderComments();
+      });
+      actions.appendChild(likeBtn);
+
+      // Dislike (descurtir) button
+      const dislikeBtn = document.createElement('button');
+      dislikeBtn.setAttribute('aria-label', 'Descurtir comentário');
+      dislikeBtn.title = `Descurtir (${comment.dislikes || 0})`;
+      dislikeBtn.innerHTML = `👎 ${comment.dislikes || 0}`;
+      dislikeBtn.addEventListener('click', () => {
+        comment.dislikes = (comment.dislikes || 0) + 1;
+        saveComments();
+        renderComments();
+      });
+      actions.appendChild(dislikeBtn);
+
+      // Reply button
+      const replyBtn = document.createElement('button');
+      replyBtn.textContent = 'Responder';
+      replyBtn.setAttribute('aria-label', 'Responder comentário');
+      replyBtn.addEventListener('click', () => openReplyBox(comment.id));
+      actions.appendChild(replyBtn);
+
+      header.appendChild(actions);
+      div.appendChild(header);
+
+      // Content
+      const content = document.createElement('div');
+      content.className = 'comment-content';
+      content.innerHTML = renderCommentContent(comment.content);
+      div.appendChild(content);
+
+      // Reply box placeholder (only max one open at a time)
+      if(editingReplyTo === comment.id) {
+        const replyBox = createReplyBox(comment.id);
+        div.appendChild(replyBox);
+      }
+
+      // Add child replies if any
+      const replies = comments.filter(c => c.parentId === comment.id).sort((a,b)=>a.timestamp - b.timestamp);
+      if(replies.length) {
+        replies.forEach(reply => {
+          const replyElem = createCommentElement(reply, depth+1);
+          div.appendChild(replyElem);
+        });
+      }
+
+      return div;
+    }
+
+    // Root comments (parentId null)
+    const roots = orderedComments.filter(c => c.parentId === null);
+    roots.forEach(c => {
+      commentsContainer.appendChild(createCommentElement(c));
+    });
+    drawLines();
+  }
+
+  // Create reply box element
+  function createReplyBox(parentId) {
+    const replyDiv = document.createElement('div');
+    replyDiv.className = 'reply-box';
+    replyDiv.setAttribute('aria-label', 'Responder comentário');
+
+    const textarea = document.createElement('textarea');
+    textarea.rows = 3;
+    textarea.placeholder = 'Escreva sua resposta aqui...';
+    replyDiv.appendChild(textarea);
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Enviar resposta';
+    btn.addEventListener('click', () => {
+      const val = textarea.value.trim();
+      if(!val) {
+        alert('O comentário não pode ser vazio.');
+        textarea.focus();
+        return;
+      }
+      addComment(val, parentId);
+      editingReplyTo = null;
+      renderComments();
+    });
+    replyDiv.appendChild(btn);
+
+    return replyDiv;
+  }
+
+  // Open reply box for given commentId
+  function openReplyBox(commentId) {
+    if(editingReplyTo === commentId) {
+      editingReplyTo = null; // toggle close
+    } else {
+      editingReplyTo = commentId;
+    }
+    renderComments();
+    scrollReplyIntoView(commentId);
+  }
+
+  // Scroll reply box smoothly into view
+  function scrollReplyIntoView(commentId) {
+    const commentElem = commentsContainer.querySelector(`[data-id="${commentId}"] .reply-box`);
+    if(commentElem) {
+      commentElem.scrollIntoView({behavior:'smooth', block:'center'});
+      const textarea = commentElem.querySelector('textarea');
+      if(textarea) textarea.focus();
+    }
+  }
+
+  // Add new comment
+  function addComment(content, parentId=null) {
+    if(!currentNickname) {
+      alert('Defina um nickname antes de comentar.');
+      return;
+    }
+    const commentObj = {
+      id: generateId(),
+      nickname: currentNickname,
+      content,
+      parentId,
+      timestamp: Date.now(),
+      likes: 0,
+      dislikes: 0
+    };
+    comments.push(commentObj);
+    saveComments();
+  }
+
+  // Generate unique ID
+  function generateId() {
+    return 'c_' + Date.now() + '_' + Math.floor(Math.random()*10000);
+  }
+
+  // Set nickname handler
+  function setNickname() {
+    const nick = nicknameInput.value.trim();
+    if(!nick) {
+      nicknameMessage.textContent = 'Nickname não pode ser vazio.';
+      return;
+    }
+    if(nick.length < 3) {
+      nicknameMessage.textContent = 'Nickname precisa ter pelo menos 3 caracteres.';
+      return;
+    }
+    if(localStorage.getItem(NICKNAME_KEY) && localStorage.getItem(NICKNAME_KEY) !== nick) {
+      nicknameMessage.textContent = 'Nickname já definido. Para trocar, limpe os dados locais do navegador.';
+      nicknameInput.value = localStorage.getItem(NICKNAME_KEY);
+      nicknameInput.disabled = true;
+      setNickBtn.disabled = true;
+      enableEditor();
+      return;
+    }
+    lockNickname(nick);
+    nicknameInput.value = nick;
+    enableEditor();
+  }
+
+  // Format buttons handlers
+  function setupFormatButtons() {
+    boldBtn.addEventListener('click', () => {
+      wrapSelectionTags('strong');
+    });
+    italicBtn.addEventListener('click', () => {
+      wrapSelectionTags('em');
+    });
+    spoilerBtn.addEventListener('click', () => {
+      wrapSelectionTags('spoiler');
+    });
+    clearFormatBtn.addEventListener('click', () => {
+      clearFormatting(commentTextarea);
+    });
+    // Keyboard shortcuts ctrl+b and ctrl+i
+    
