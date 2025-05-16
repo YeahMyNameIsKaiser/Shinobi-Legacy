@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guia da Shinobi Legacy - Comentários</title>
-  <style>
+!DOCTYPE html>
+html lang="pt-BR">
+head>
+  meta charset="UTF-8" />
+  meta name="viewport" content="width=device-width, initial-scale=1" />
+  title>Guia da Shinobi Legacy - RPG/title>
+  style>
     /* Reset */
     * {
       margin: 0;
@@ -12,636 +12,449 @@
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #ddd;
+      font-family: 'Cinzel', serif, Arial, sans-serif;
+      background:
+        url('https://i.pinimg.com/736x/81/38/4c/81384c16cae2f0417f7320c20e77e613.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #f0e6e6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 1rem 0;
-      user-select: none;
-    }
-    h1 {
-      color: #e63946;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-weight: 900;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      user-select: text;
-    }
-    .container {
-      width: 95%;
-      max-width: 900px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 1rem 1.5rem 2rem 1.5rem;
-      box-shadow: 0 0 15px #e6394677;
-      box-sizing: border-box;
       position: relative;
-    }
-    .nickname-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-    .nickname-section input {
-      flex-grow: 1;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      border: 2px solid #e63946;
-      background: #2e2e2e;
-      color: #eee;
-      font-size: 1rem;
-      user-select: text;
-    }
-    .nickname-section button {
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      background: #e63946;
-      color: #fff;
-      border: none;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .nickname-section button:disabled {
-      background: #72000088;
-      cursor: not-allowed;
-    }
-    .nickname-message {
-      margin-top: 0.3rem;
-      font-size: 0.9rem;
-      color: #f88;
-      user-select: text;
-    }
-
-    /* Editor */
-    .editor {
-      margin-bottom: 1rem;
-      display: flex;
-      flex-direction: column;
-      background: #2a2a2a;
-      border-radius: 10px;
-      padding: 0.5rem;
-      user-select: text;
-    }
-    .toolbar {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .toolbar button {
-      background: #e63946;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    .toolbar button:hover:not(:disabled),
-    .toolbar button:focus-visible:not(:disabled) {
-      background-color: #b22632;
-      outline: none;
-    }
-    .toolbar button:disabled {
-      background-color: #72000088;
-      cursor: not-allowed;
-    }
-    .editor textarea {
-      resize: vertical;
-      min-height: 80px;
-      background: #1e1e1e;
-      color: #ddd;
-      border: none;
-      border-radius: 8px;
-      padding: 0.7rem;
-      font-size: 1rem;
-      font-family: monospace, monospace;
-      user-select: text;
-    }
-
-    /* Comments list */
-    .comments-list {
-      margin-top: 1rem;
-      position: relative;
-      user-select: text;
-    }
-    .comment {
-      background: #292929;
-      border: 1px solid #e63946;
-      border-radius: 8px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1rem;
-      position: relative;
-      box-shadow: 0 0 10px #e6394699;
-    }
-    .comment.reply {
-      margin-left: 2rem;
-      border-color: #ab2c36;
-      box-shadow: 0 0 8px #ab2c3699;
-    }
-    .comment-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.3rem;
-    }
-    .comment-nickname {
-      font-weight: 900;
-      color: #f94144;
-      user-select: text;
-    }
-    .comment-actions {
-      display: flex;
-      gap: 12px;
-      user-select: none;
-    }
-    .comment-actions button {
-      background: transparent;
-      border: none;
-      color: #f94144;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    .comment-actions button:hover,
-    .comment-actions button:focus {
-      color: #fa7c7c;
-      outline: none;
-    }
-    .comment-content {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: Arial, Helvetica, sans-serif;
-      user-select: text;
-    }
-
-    /* Formatted text styles */
-    strong {
-      font-weight: 900;
-      color: #ff5555;
-    }
-    em {
-      font-style: italic;
-      color: #ffaaaa;
-    }
-    .spoiler {
-      color: transparent;
-      background-color: #333;
-      border-radius: 3px;
-      padding: 0 3px;
-      cursor: pointer;
-      user-select: none;
-      border: 1px solid #555;
-      transition: color 0.3s ease, background-color 0.3s ease;
-    }
-    .spoiler.revealed {
-      color: inherit;
-      background-color: inherit;
-      border: none;
-      cursor: default;
-      user-select: text;
-    }
-
-    .reply-box {
-      margin-top: 0.8rem;
-      padding-left: 1rem;
-      border-left: 2px solid #bb2c36;
-      user-select: text;
-    }
-    .reply-box textarea {
-      resize: vertical;
-      width: 100%;
-      min-height: 60px;
-      background: #2e2e2e;
-      border-radius: 7px;
-      border: 1px solid #e63946;
-      color: #eee;
-      padding: 0.5rem;
-      font-family: monospace, monospace;
-    }
-    .reply-box button {
-      margin-top: 0.4rem;
-      padding: 0.4rem 1rem;
-      font-weight: 700;
-      background: #e63946;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .reply-box button:hover {
-      background-color: #b22632;
-    }
-
-    /* Lines connecting replies */
-    .line-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
       z-index: 0;
     }
-
-    /* Scroll area for comments */
-    .comments-container {
-      max-height: 400px;
-      overflow-y: auto;
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: -1;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    header {
+      background: rgba(74, 11, 11, 0.7);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(255, 0, 0, 0.8);
       position: relative;
-      margin-top: 1rem;
-      user-select: text;
+      z-index: 2;
+      transition: all 0.3s ease;
     }
-  </style>
-</head>
-<body>
-  <h1>Comentários do Guia da Shinobi Legacy</h1>
-  <div class="container">
-    <div class="nickname-section" aria-label="Área para definir nickname">
-      <input type="text" id="nickname-input" aria-label="Digite seu nickname" placeholder="Digite seu nickname" maxlength="20" autocomplete="off" />
-      <button id="set-nick-btn">Confirmar Nickname</button>
-    </div>
-    <div class="nickname-message" id="nickname-message" role="alert" aria-live="assertive"></div>
-
-    <div aria-label="Editor de comentários" class="editor" aria-disabled="true" id="comment-editor" style="opacity:0.6; pointer-events:none;">
-      <div class="toolbar" role="toolbar" aria-label="Ferramentas de formatação">
-        <button type="button" data-command="bold" aria-label="Negrito (Ctrl+B)" title="Negrito (Ctrl+B)" disabled><strong>B</strong></button>
-        <button type="button" data-command="italic" aria-label="Itálico (Ctrl+I)" title="Itálico (Ctrl+I)" disabled><em>I</em></button>
-        <button type="button" data-command="spoiler" aria-label="Spoiler" title="Spoiler" disabled>Spoiler</button>
-        <button type="button" id="clear-format" aria-label="Limpar formatação" title="Limpar formatação" disabled>Limpar</button>
-      </div>
-      <textarea id="comment-textarea" aria-label="Digite seu comentário" placeholder="Escreva seu comentário aqui..." disabled></textarea>
-      <button id="post-comment-btn" disabled>Enviar Comentário</button>
-    </div>
-
-    <div class="comments-container" id="comments-container" aria-live="polite" aria-relevant="additions removals" aria-atomic="false" tabindex="0">
-      <!-- Comments render here -->
-    </div>
-    <canvas id="lines-canvas" class="line-canvas"></canvas>
-  </div>
-
-<script>
-  // Store comments in localStorage key
-  const STORAGE_KEY = 'shinobiLegacyComments';
-  // Store user nickname in localStorage key
-  const NICKNAME_KEY = 'shinobiLegacyNickname';
-
-  // Elements
-  const nicknameInput = document.getElementById('nickname-input');
-  const setNickBtn = document.getElementById('set-nick-btn');
-  const nicknameMessage = document.getElementById('nickname-message');
-  const commentEditor = document.getElementById('comment-editor');
-  const boldBtn = commentEditor.querySelector('button[data-command="bold"]');
-  const italicBtn = commentEditor.querySelector('button[data-command="italic"]');
-  const spoilerBtn = commentEditor.querySelector('button[data-command="spoiler"]');
-  const clearFormatBtn = commentEditor.querySelector('#clear-format');
-  const commentTextarea = document.getElementById('comment-textarea');
-  const postCommentBtn = document.getElementById('post-comment-btn');
-  const commentsContainer = document.getElementById('comments-container');
-  const linesCanvas = document.getElementById('lines-canvas');
-  const ctx = linesCanvas.getContext('2d');
-
-  // State
-  let comments = [];
-  let currentNickname = localStorage.getItem(NICKNAME_KEY) || '';
-  let editingReplyTo = null; // comment id for reply or null for new
-  let nicknameLocked = false;
-
-  // Helper: Save comments array to localStorage
-  function saveComments() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-  }
-
-  // Helper: Load comments array from localStorage
-  function loadComments() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        comments = JSON.parse(stored);
-      } catch(e) {
-        comments = [];
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ff3333;
+      text-shadow:
+         0 0 6px #ff0000,
+         0 0 15px #ff4444,
+         0 0 25px #ff4444,
+         0 0 40px #ff6666;
+      letter-spacing: 5px;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 3rem auto 6rem auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      /* Default PC layout: grid with minmax and repeat */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    section.card {
+      background: rgba(27, 0, 0, 0.8);
+      border: 2px solid #ff3333;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      box-shadow:
+        inset 0 0 10px #ff3333dd,
+        0 5px 15px #ff0000cc;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    section.card:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        inset 0 0 25px #ff6666ee,
+        0 10px 35px #ff5555dd;
+      background: rgba(40, 0, 0, 0.9);
+    }
+    section.card h2 {
+      color: #ff4444;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #ff4444;
+    }
+    section.card p {
+      flex-grow: 1;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #f3dfdfcc;
+      margin-bottom: 1.5rem;
+      font-style: normal;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    section.card a {
+      align-self: flex-start;
+      background-color: #ff2222;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1.3rem;
+      font-weight: 700;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff4444;
+      transition: background-color 0.3s ease;
+    }
+    section.card a:hover,
+    section.card a:focus {
+      background-color: #cc1a1a;
+      box-shadow: 0 0 18px #ff6666;
+      outline: none;
+    }
+    footer {
+      background: rgba(74, 11, 11, 0.7);
+      padding: 1rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ffbbbbcc;
+      font-style: normal;
+      letter-spacing: 0.05em;
+      text-shadow: 1px 1px 4px #660000;
+      position: relative;
+      z-index: 2;
+    }
+    /* Aba inferior puxável */
+    #drawerToggleBtn {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d62e2e;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 25px 25px 0 0;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff4444;
+      z-index: 1005;
+      transition: background-color 0.3s ease;
+      font-size: 1.1rem;
+    }
+    #drawerToggleBtn:hover {
+      background-color: #a01313;
+    }
+    #bottomDrawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 50vh;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2g6iQVDXNjAb00kHYnvIcXvRTTkpZmu51BTJS1osnQHgpjKkbF2wPfSw&s=10') no-repeat center center / cover;
+      backdrop-filter: brightness(0.2);
+      box-shadow: inset 0 0 60px 25px rgba(214,46,46,0.5);
+      color: #f0e6e6;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+    }
+    #bottomDrawer.open {
+      transform: translateY(0);
+    }
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-x: hidden;
+      padding-bottom: 1rem;
+    }
+    .drawer-link {
+      flex: 0 0 auto;
+      height: 140px;
+      border-radius: 15px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35) sepia(0.6) saturate(3) hue-rotate(-10deg);
+    }
+    .drawer-link:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 15px #ff6666;
+      filter: brightness(0.45) sepia(0.8) saturate(3.3) hue-rotate(-10deg);
+    }
+    .drawer-link span {
+      position: relative;
+      z-index: 2;
+      text-shadow:
+        0 0 5px #ff3333,
+        0 0 10px #ff2222,
+        0 0 15px #c10000,
+        0 0 20px #ff5555;
+    }
+    .drawer-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      border-radius: 15px;
+      z-index: 1;
+    }
+    .npc-sublinks {
+      margin-top: 0.8rem;
+      display: none;
+      gap: 0.8rem;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+    .npc-sublink {
+      flex: 0 0 140px;
+      height: 120px;
+      border-radius: 15px;
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+      line-height: 1.3;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 0 4px #aa2222;
+      transition: box-shadow 0.3s ease, filter 0.3s ease;
+      filter: brightness(0.35) sepia(0.6) saturate(3) hue-rotate(-10deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+    }
+    .npc-sublink::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      border-radius: 15px;
+      z-index: 0;
+    }
+    .npc-sublink:hover {
+      filter: brightness(0.45) sepia(0.8) saturate(3.3) hue-rotate(-10deg);
+      box-shadow: 0 0 12px #ff4444;
+    }
+    .npc-toggle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      z-index: 3;
+      transition: transform 0.3s ease;
+      background: transparent;
+      border: none;
+      color: #ff4444;
+      font-size: 1.7rem;
+      user-select: none;
+    }
+    .npc-toggle.open {
+      transform: rotate(90deg);
+    }
+    .npc-sublinks.flex-row {
+      display: flex;
+    }
+    /* Scrollbars */
+    #bottomDrawer::-webkit-scrollbar,
+    .npc-sublinks::-webkit-scrollbar {
+      height: 8px;
+    }
+    #bottomDrawer::-webkit-scrollbar-track,
+    .npc-sublinks::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #bottomDrawer::-webkit-scrollbar-thumb,
+    .npc-sublinks::-webkit-scrollbar-thumb {
+      background-color: rgba(214,46,46,0.7);
+      border-radius: 50px;
+    }
+    /* Responsividade */
+    @media (max-width: 600px) {
+      #bottomDrawer {
+        max-height: 60vh;
+        padding: 1rem 1rem;
+      }
+      .drawer-link {
+        height: 110px;
+        font-size: 1rem;
+      }
+      .npc-sublink {
+        flex: 0 0 100px;
+        height: 90px;
+        font-size: 0.85rem;
+        padding: 0 6px;
+      }
+      /* Para celular, deixa main as colunas em 1 (vertical) */
+      main {
+        grid-template-columns: 1fr !important;
+        margin-top: 2rem !important;
+      }
+      /* Centralizar o título no header para celular */
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
       }
     }
-  }
+  /style>
+/head>
+body>
+  header>
+    h1>Bem vindo ao guia da Shinobi Legacy/h1>
+  /header>
+  main id="mainContent">
+    section class="card" tabindex="0" role="link" aria-label="Sistemas Essenciais: clique para saber mais">
+      h2>Sistemas Essenciais/h2>
+      p>Sistemas necessários para o entendimento inicial do RPG, necessários para que possa começar a jogar./p>
+      a href="http://aminoapps.com/p/38f9amk" target="_blank" rel="noopener noreferrer">Saiba mais/a>
+    /section>
+    section class="card" tabindex="0" role="link" aria-label="Sistemas Especiais: clique para saber mais">
+      h2>Sistemas Especiais/h2>
+      p>Sistemas não necessários, mas que abrangem seu entendimento e permitem acrescentar mais possibilidades de crescimento ao seu personagem./p>
+      a href="http://aminoapps.com/p/ncoamlq" target="_blank" rel="noopener noreferrer">Saiba mais/a>
+    /section>
+    section class="card" tabindex="0" role="link" aria-label="Árvores: clique para saber mais">
+      h2>Árvores/h2>
+      p>Fundamentais para o crescimento de seu personagem em nosso mundo, que definirá quem ou pelo que ele será conhecido, seja por sua força, velocidade, ou capacidade de, por exemplo, selamento./p>
+      a href="http://aminoapps.com/p/a94443k" target="_blank" rel="noopener noreferrer">Saiba mais/a>
+    /section>
+  /main>
 
-  // Helper: Save nickname locked
-  function lockNickname(nick) {
-    localStorage.setItem(NICKNAME_KEY, nick);
-    currentNickname = nick;
-    nicknameLocked = true;
-  }
+  !-- Botão da aba inferior puxável -->
+  button id="drawerToggleBtn" aria-expanded="false" aria-controls="bottomDrawer" aria-label="Abrir opções adicionais">🔻 Abrir Opções/button>
 
-  // Enable comment editor if nickname set
-  function enableEditor() {
-    commentEditor.style.opacity = '1';
-    commentEditor.style.pointerEvents = 'auto';
-    boldBtn.disabled = false;
-    italicBtn.disabled = false;
-    spoilerBtn.disabled = false;
-    clearFormatBtn.disabled = false;
-    commentTextarea.disabled = false;
-    postCommentBtn.disabled = false;
-    nicknameInput.disabled = true;
-    setNickBtn.disabled = true;
-    nicknameMessage.textContent = "Nickname definido como: " + currentNickname;
-    nicknameMessage.style.color = '#6ef186';
-  }
+  !-- Aba inferior puxável -->
+  div id="bottomDrawer" role="region" aria-hidden="true">
+    div class="drawer-links" role="list">
+      a href="http://aminoapps.com/p/j434vg" target="_blank" class="drawer-link" role="listitem" tabindex="0" 
+         style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTybE4a4pWGF9BKQ8nVesnLYpoDWlk9W6VZ85jbPhF1u3KLbTQh7wS7Fd4O&s=10')">
+        span>Modelos de Criação/span>
+      /a>
+      a href="http://aminoapps.com/p/bler4d" target="_blank" class="drawer-link" role="listitem" tabindex="0" 
+         style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6uf38b5TMC4uZqh1wVDn-x4lnCSHJIsBp86NSPKOEBcWa3JCCBCZi0Y&s=10')">
+        span>Biblioteca de Jutsus/span>
+      /a>
+      a href="http://aminoapps.com/p/gms7gu" target="_blank" class="drawer-link" role="listitem" tabindex="0" 
+         style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJZP-QQtcMxTWsLfFuFElkK51t_2vn03LXa3GRDdjnOOyAStkwOhFzfZw&s=10')">
+        span>Ninpō/span>
+      /a>
+      div class="drawer-link" role="listitem" tabindex="0" 
+        style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10'); position:relative; user-select:none;">
+        span>NPC's/span>
+        button id="npcSubToggle" aria-expanded="false" aria-controls="npcSublinks" aria-label="Expandir sublinks de NPCs"
+                style="position:absolute; top:8px; right:8px; background:none; border:none; color:#ff4444; font-size:1.8rem; cursor:pointer; user-select:none;">
+          ▶
+        /button>
+        div id="npcSublinks" class="npc-sublinks" role="list" aria-hidden="true" style="margin-top:0.6rem; flex-wrap: nowrap;">
+          a href="http://aminoapps.com/p/p7wtzbv" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Amegakure/a>
+          a href="http://aminoapps.com/p/p8x585" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Iwagakure/a>
+          a href="http://aminoapps.com/p/u8gen4" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Kirigakure/a>
+          a href="http://aminoapps.com/p/gn0xew8" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Konohagakure/a>
+          a href="http://aminoapps.com/p/8u09o0h" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Kumogakure/a>
+          a href="http://aminoapps.com/p/v6ampr" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Kusagakure/a>
+          a href="http://aminoapps.com/p/03g1hjs" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Otogakure/a>
+          a href="http://aminoapps.com/p/20y2o9" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Sunagakure/a>
+          a href="http://aminoapps.com/p/g2facj" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Takigakure/a>
+          a href="http://aminoapps.com/p/isb70f" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Takumigakure/a>
+          a href="http://aminoapps.com/p/mammvz7" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Tsukigakure/a>
+          a href="http://aminoapps.com/p/542wyt" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Yugakure/a>
+          a href="http://aminoapps.com/p/zu9q92" target="_blank" class="npc-sublink" role="listitem"
+             style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2z-p_8KRsfR0REP9QXC2seMLV2h1RgSW71waE64Oo4wrk1N5cwiM7DQ&s=10')">Yukigakure/a>
+        /div>
+      /div>
+    /div>
+  /div>
 
-  // Disable editor, enable nickname input
-  function disableEditor() {
-    commentEditor.style.opacity = '0.6';
-    commentEditor.style.pointerEvents = 'none';
-    boldBtn.disabled = true;
-    italicBtn.disabled = true;
-    spoilerBtn.disabled = true;
-    clearFormatBtn.disabled = true;
-    commentTextarea.disabled = true;
-    postCommentBtn.disabled = true;
-    nicknameInput.disabled = false;
-    setNickBtn.disabled = false;
-    nicknameMessage.textContent = "Por favor, defina um nickname para comentar.";
-    nicknameMessage.style.color = '#f56969';
-  }
+  footer>
+    &copy; 2024 Todos os direitos reservados para a staff da Shinobi Legacy
+  /footer>
 
-  // Apply formatting commands to textarea content selection
-  function wrapSelection(textarea, tag) {
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    if (start === end) return;
-    const before = textarea.value.substring(0, start);
-    const selected = textarea.value.substring(start, end);
-    const after = textarea.value.substring(end);
-    textarea.value = before + `<${tag}>` + selected + `</${tag}>` + after;
-    // Restore selection around formatted text
-    textarea.selectionStart = start;
-    textarea.selectionEnd = end + tag.length * 2 + 5; // <tag> and </tag>
-  }
+  script>
+    const drawerBtn = document.getElementById('drawerToggleBtn');
+    const drawer = document.getElementById('bottomDrawer');
+    const npcToggleBtn = document.getElementById('npcSubToggle');
+    const npcSublinks = document.getElementById('npcSublinks');
 
-  // Insert spoiler tag specially
-  function wrapSpoiler(textarea) {
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    if(start === end) return;
-    const before = textarea.value.substring(0, start);
-    const selected = textarea.value.substring(start, end);
-    const after = textarea.value.substring(end);
-    textarea.value = before + `<spoiler>` + selected + `</spoiler>` + after;
-    textarea.selectionStart = start;
-    textarea.selectionEnd = end + 17; // length of <spoiler></spoiler>
-  }
+    drawerBtn.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      drawerBtn.setAttribute('aria-expanded', isOpen);
+      drawer.setAttribute('aria-hidden', !isOpen);
+      drawerBtn.textContent = isOpen ? '▲ Fechar Opções' : '🔻 Abrir Opções';
+    });
 
-  // Clear all tags from textarea content (simple approach)
-  function clearFormatting(textarea) {
-    textarea.value = textarea.value.replace(/<[^>]+>/g, '');
-  }
+    npcToggleBtn.addEventListener('click', () => {
+      const expanded = npcToggleBtn.classList.toggle('open');
+      npcSublinks.style.display = expanded ? 'flex' : 'none';
+      npcToggleBtn.setAttribute('aria-expanded', expanded);
+    });
 
-  // Convert comment content from simple tags to HTML with styles and spoiler handling
-  function renderCommentContent(text) {
-    let html = text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-
-    // Simple replacements for allowed tags
-    html = html.replace(/&lt;strong&gt;(.*?)&lt;\/strong&gt;/gi, '<strong>$1</strong>');
-    html = html.replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/gi, '<strong>$1</strong>');
-    html = html.replace(/&lt;em&gt;(.*?)&lt;\/em&gt;/gi, '<em>$1</em>');
-    html = html.replace(/&lt;i&gt;(.*?)&lt;\/i&gt;/gi, '<em>$1</em>');
-    // Spoiler with interactive span
-    html = html.replace(/&lt;spoiler&gt;(.*?)&lt;\/spoiler&gt;/gi,
-      `<span class="spoiler" tabindex="0" role="button" aria-label="Spoiler: clique para revelar">$1</span>`);
-    // Preserve line breaks for newlines
-    html = html.replace(/\n/g, '<br>');
-
-    return html;
-  }
-
-  // Toggle spoiler reveal on click or keyboard
-  function spoilerToggleHandler(e) {
-    if(!e.target.classList.contains('spoiler')) return;
-    if(e.type === 'click' || (e.type === 'keydown' && (e.key==='Enter' || e.key===' '))) {
-      e.preventDefault();
-      e.target.classList.toggle('revealed');
-    }
-  }
-
-  // Generate unique ID for comment
-  function generateId() {
-    return 'c_' + Date.now() + '_' + Math.floor(Math.random()*1000);
-  }
-
-  // Render comments recursively with replies and lines
-  function renderComments() {
-    commentsContainer.innerHTML = '';
-    // Sort comments ascending by timestamp
-    const orderedComments = [...comments].sort((a,b) => a.timestamp - b.timestamp);
-
-    function createCommentElement(comment, depth=0) {
-      const div = document.createElement('div');
-      div.className = 'comment';
-      if(depth>0) div.classList.add('reply');
-      div.dataset.id = comment.id;
-      div.style.position = 'relative';
-
-      // Header: nickname and actions
-      const header = document.createElement('div');
-      header.className = 'comment-header';
-
-      const nickSpan = document.createElement('span');
-      nickSpan.className = 'comment-nickname';
-      nickSpan.textContent = comment.nickname;
-      header.appendChild(nickSpan);
-
-      const actions = document.createElement('div');
-      actions.className = 'comment-actions';
-
-      // Like (curtir) button
-      const likeBtn = document.createElement('button');
-      likeBtn.setAttribute('aria-label', 'Curtir comentário');
-      likeBtn.title = `Curtir (${comment.likes || 0})`;
-      likeBtn.innerHTML = `👍 ${comment.likes || 0}`;
-      likeBtn.addEventListener('click', () => {
-        comment.likes = (comment.likes || 0) + 1;
-        saveComments();
-        renderComments();
-      });
-      actions.appendChild(likeBtn);
-
-      // Dislike (descurtir) button
-      const dislikeBtn = document.createElement('button');
-      dislikeBtn.setAttribute('aria-label', 'Descurtir comentário');
-      dislikeBtn.title = `Descurtir (${comment.dislikes || 0})`;
-      dislikeBtn.innerHTML = `👎 ${comment.dislikes || 0}`;
-      dislikeBtn.addEventListener('click', () => {
-        comment.dislikes = (comment.dislikes || 0) + 1;
-        saveComments();
-        renderComments();
-      });
-      actions.appendChild(dislikeBtn);
-
-      // Reply button
-      const replyBtn = document.createElement('button');
-      replyBtn.textContent = 'Responder';
-      replyBtn.setAttribute('aria-label', 'Responder comentário');
-      replyBtn.addEventListener('click', () => openReplyBox(comment.id));
-      actions.appendChild(replyBtn);
-
-      header.appendChild(actions);
-      div.appendChild(header);
-
-      // Content
-      const content = document.createElement('div');
-      content.className = 'comment-content';
-      content.innerHTML = renderCommentContent(comment.content);
-      div.appendChild(content);
-
-      // Reply box placeholder (only max one open at a time)
-      if(editingReplyTo === comment.id) {
-        const replyBox = createReplyBox(comment.id);
-        div.appendChild(replyBox);
+    // Detect if device is mobile and adjust layout and header centering
+    function adjustLayoutForDevice() {
+      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+      const mainContent = document.querySelector('main');
+      const header = document.querySelector('header');
+      // For mobile: main content vertical and reduce margin top
+      if (isMobile) {
+        mainContent.style.gridTemplateColumns = '1fr';
+        mainContent.style.marginTop = '2rem';
+        header.style.display = 'flex';
+        header.style.justifyContent = 'center';
+        header.style.alignItems = 'center';
+        header.style.textAlign = 'center';
+      } else {
+        // For desktop: use original grid layout and default header alignment
+        mainContent.style.gridTemplateColumns = 'repeat(auto-fit, minmax(280px, 1fr))';
+        mainContent.style.marginTop = '3rem';
+        header.style.display = 'block';
+        header.style.textAlign = 'center';
       }
-
-      // Add child replies if any
-      const replies = comments.filter(c => c.parentId === comment.id).sort((a,b)=>a.timestamp - b.timestamp);
-      if(replies.length) {
-        replies.forEach(reply => {
-          const replyElem = createCommentElement(reply, depth+1);
-          div.appendChild(replyElem);
-        });
-      }
-
-      return div;
     }
-
-    // Root comments (parentId null)
-    const roots = orderedComments.filter(c => c.parentId === null);
-    roots.forEach(c => {
-      commentsContainer.appendChild(createCommentElement(c));
-    });
-    drawLines();
-  }
-
-  // Create reply box element
-  function createReplyBox(parentId) {
-    const replyDiv = document.createElement('div');
-    replyDiv.className = 'reply-box';
-    replyDiv.setAttribute('aria-label', 'Responder comentário');
-
-    const textarea = document.createElement('textarea');
-    textarea.rows = 3;
-    textarea.placeholder = 'Escreva sua resposta aqui...';
-    replyDiv.appendChild(textarea);
-
-    const btn = document.createElement('button');
-    btn.textContent = 'Enviar resposta';
-    btn.addEventListener('click', () => {
-      const val = textarea.value.trim();
-      if(!val) {
-        alert('O comentário não pode ser vazio.');
-        textarea.focus();
-        return;
-      }
-      addComment(val, parentId);
-      editingReplyTo = null;
-      renderComments();
-    });
-    replyDiv.appendChild(btn);
-
-    return replyDiv;
-  }
-
-  // Open reply box for given commentId
-  function openReplyBox(commentId) {
-    if(editingReplyTo === commentId) {
-      editingReplyTo = null; // toggle close
-    } else {
-      editingReplyTo = commentId;
-    }
-    renderComments();
-    scrollReplyIntoView(commentId);
-  }
-
-  // Scroll reply box smoothly into view
-  function scrollReplyIntoView(commentId) {
-    const commentElem = commentsContainer.querySelector(`[data-id="${commentId}"] .reply-box`);
-    if(commentElem) {
-      commentElem.scrollIntoView({behavior:'smooth', block:'center'});
-      const textarea = commentElem.querySelector('textarea');
-      if(textarea) textarea.focus();
-    }
-  }
-
-  // Add new comment
-  function addComment(content, parentId=null) {
-    if(!currentNickname) {
-      alert('Defina um nickname antes de comentar.');
-      return;
-    }
-    const commentObj = {
-      id: generateId(),
-      nickname: currentNickname,
-      content,
-      parentId,
-      timestamp: Date.now(),
-      likes: 0,
-      dislikes: 0
-    };
-    comments.push(commentObj);
-    saveComments();
-  }
-
-  // Generate unique ID
-  function generateId() {
-    return 'c_' + Date.now() + '_' + Math.floor(Math.random()*10000);
-  }
-
-  // Set nickname handler
-  function setNickname() {
-    const nick = nicknameInput.value.trim();
-    if(!nick) {
-      nicknameMessage.textContent = 'Nickname não pode ser vazio.';
-      return;
-    }
-    if(nick.length < 3) {
-      nicknameMessage.textContent = 'Nickname precisa ter pelo menos 3 caracteres.';
-      return;
-    }
-    if(localStorage.getItem(NICKNAME_KEY) && localStorage.getItem(NICKNAME_KEY) !== nick) {
-      nicknameMessage.textContent = 'Nickname já definido. Para trocar, limpe os dados locais do navegador.';
-      nicknameInput.value = localStorage.getItem(NICKNAME_KEY);
-      nicknameInput.disabled = true;
-      setNickBtn.disabled = true;
-      enableEditor();
-      return;
-    }
-    lockNickname(nick);
-    nicknameInput.value = nick;
-    enableEditor();
-  }
-
-  // Format buttons handlers
-  function setupFormatButtons() {
-    boldBtn.addEventListener('click', () => {
-      wrapSelectionTags('strong');
-    });
-    italicBtn.addEventListener('click', () => {
-      wrapSelectionTags('em');
-    });
-    spoilerBtn.addEventListener('click', () => {
-      wrapSelectionTags('spoiler');
-    });
-    clearFormatBtn.addEventListener('click', () => {
-      clearFormatting(commentTextarea);
-    });
-    // Keyboard shortcuts ctrl+b and ctrl+i
-    
+    window.addEventListener('load', adjustLayoutForDevice);
+    window.addEventListener('resize', adjustLayoutForDevice);
+  /script>
+</body>
+</html>
