@@ -419,14 +419,14 @@
     const npcToggleBtn = document.getElementById('npcSubToggle');
     const npcSublinks = document.getElementById('npcSublinks');
 
-    <drawerBtn.addEventListener('click', () => {
+    drawerBtn.addEventListener('click', () => {
       const isOpen = drawer.classList.toggle('open');
       drawerBtn.setAttribute('aria-expanded', isOpen);
       drawer.setAttribute('aria-hidden', !isOpen);
       drawerBtn.textContent = isOpen ? '▲ Fechar Opções' : '🔻 Abrir Opções';
     });
 
-    <npcToggleBtn.addEventListener('click', () => {
+    npcToggleBtn.addEventListener('click', () => {
       const expanded = npcToggleBtn.classList.toggle('open');
       npcSublinks.style.display = expanded ? 'flex' : 'none';
       npcToggleBtn.setAttribute('aria-expanded', expanded);
@@ -453,8 +453,6 @@
         header.style.textAlign = 'center';
       }
     }
-    window.addEventListener('load', adjustLayoutForDevice);
-    window.addEventListener('resize', adjustLayoutForDevice);
   </script>
 </body>
 </html>
